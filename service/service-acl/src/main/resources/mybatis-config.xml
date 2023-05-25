@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--    &lt;!&ndash; 引入外部属性文件 &ndash;&gt;-->
+<!--    <properties resource="jdbc.properties"/>-->
+
+<!--    &lt;!&ndash; Mybatis全局配置 &ndash;&gt;-->
+<!--    <settings>-->
+<!--        &lt;!&ndash; 将数据库表字段映射到驼峰式命名的Java实体类属性中 &ndash;&gt;-->
+<!--        &lt;!&ndash; 数据库表字段格式：单词_单词 &ndash;&gt;-->
+<!--        &lt;!&ndash; Java实体类属性：首字母小写的驼峰式命名 &ndash;&gt;-->
+<!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
+<!--    </settings>-->
+    <!--================= 下面的这一部分在和spring整合后注释掉 ==================== -->
+    <!--
+                   ***
+                   ***
+                   ***
+                   ***
+                   ***
+                *********
+                 *******
+                  *****
+                   ***
+                    *
+    -->
+    <!-- Mybatis工作时有可能用到的各种环境 -->
+<!--    <environments default="development">-->
+
+<!--        &lt;!&ndash; 一个具体的环境，就是一个可以使用的数据库连接信息 &ndash;&gt;-->
+<!--        <environment id="development">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+
+<!--                &lt;!&ndash; 使用${}格式从外部属性文件中引用数据 &ndash;&gt;-->
+<!--                <property name="driver" value="${wechat.dev.driver}"/>-->
+<!--                <property name="url" value="${wechat.dev.url}"/>-->
+<!--                <property name="username" value="${wechat.dev.username}"/>-->
+<!--                <property name="password" value="${wechat.dev.password}"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+<!--    </environments>-->
+<!--        *          -->
+<!--       ***              -->
+<!--      *****         -->
+<!--     *******        -->
+<!--    *********        -->
+<!--       ***              -->
+<!--       ***           -->
+<!--       ***          -->
+<!--       ***            -->
+<!--       ***             -->
+    <!--================= 上面的这一部分在和spring整合后注释掉 ==================== -->
+    <!-- 注册Mapper配置文件 -->
+<!--    <mappers>-->
+<!--        &lt;!&ndash; 使用mapper标签指定一个具体的Mapper配置文件 &ndash;&gt;-->
+<!--        <mapper resource="mappers/EmployeeMapper.xml"/>-->
+<!--    </mappers>-->
+</configuration>

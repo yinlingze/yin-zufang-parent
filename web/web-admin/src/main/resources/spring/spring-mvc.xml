@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <import resource="spring-registry.xml"></import>
+
+
+
+    <!-- SpringMVC 标配：注解驱动 -->
+        <!--名称空间：http://www.springframework.org/schema/mvc-->
+           <mvc:default-servlet-handler/>
+        <!-- 开启mvc注解-->
+        <mvc:annotation-driven>
+            <mvc:message-converters register-defaults="true">
+                <!-- 配置Fastjson支持 -->
+                <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                            <value>application/json</value>
+                        </list>
+                    </property>
+                </bean>
+            </mvc:message-converters>
+        </mvc:annotation-driven>
+
+     <!-- 视图解析器 -->
+         <bean id="thymeleafViewResolver" class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+             <property name="order" value="1"/>
+             <property name="characterEncoding" value="UTF-8"/>
+             <property name="templateEngine">
+                 <bean class="org.thymeleaf.spring5.SpringTemplateEngine">
+                     <property name="templateResolver">
+                         <bean class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+                             <property name="prefix" value="/WEB-INF/templates/"/>
+                             <property name="suffix" value=".html"/>
+                             <property name="characterEncoding" value="UTF-8"/>
+                             <property name="templateMode" value="HTML5"/>
+                         </bean>
+                     </property>
+                 </bean>
+             </property>
+         </bean>
+    <!-- 配置自动扫描的包 -->
+    <!-- 最基本的扫描方式 -->
+    <!-- 配置自动扫描的包 -->
+        <!-- 情况一：最基本的扫描方式 -->
+        <context:component-scan base-package="org.example.controller"/>
+
+        <!-- 情况二：在指定扫描包的基础上指定匹配模式 -->
+        <!--<context:component-scan
+                base-package="com.atguigu.ioc.component"
+                resource-pattern="Soldier*.class"/>-->
+
+        <!-- 情况三：指定不扫描的组件 -->
+        <!--<context:component-scan base-package="com.atguigu.ioc.component">-->
+
+            <!-- context:exclude-filter标签：指定排除规则 -->
+            <!-- type属性：指定根据什么来进行排除，annotation取值表示根据注解来排除 -->
+            <!-- expression属性：指定排除规则的表达式，对于注解来说指定全类名即可 -->
+            <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+        <!--</context:component-scan>-->
+
+        <!-- 情况四：仅扫描指定的组件 -->
+        <!-- 仅扫描 = 关闭默认规则 + 追加规则 -->
+        <!-- use-default-filters属性：取值false表示关闭默认扫描规则 -->
+        <!--<context:component-scan base-package="com.atguigu.ioc.component" use-default-filters="false">-->
+
+            <!-- context:include-filter标签：指定在原有扫描规则的基础上追加的规则 -->
+            <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+        <!--</context:component-scan>-->
+
+
+    <bean id="multipartResolver"
+              class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+            <!-- 设定文件上传的最大值为100MB，100*1024*1024 -->
+            <property name="maxUploadSize" value="104857600" />
+            <!-- 设定文件上传时写入内存的最大值，如果小于这个参数不会生成临时文件，默认为10240 -->
+            <property name="maxInMemorySize" value="4096" />
+            <!-- 设定默认编码 -->
+            <property name="defaultEncoding" value="UTF-8"/>
+        </bean>
+
+</beans>
